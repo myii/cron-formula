@@ -2,7 +2,7 @@
 cron-formula
 ==============
 
-Install and configure cron and set up cron tasks.
+Install and configure cron and set up cron tasks. Tested in CentOS 6/7 and Ubuntu 12/14/16.
 
 .. note::
 
@@ -14,14 +14,6 @@ Available states
 
 .. contents::
     :local:
-
-|OS|Compatibility|
-|:----:|:--------------:|
-|Ubuntu 12|Yes|
-|Ubuntu 14|Yes|
-|Ubuntu 16|Yes|
-|CentOS 6|Yes|
-|CentOS 7|Yes|
 
 ``cron``
 --------
