@@ -21,6 +21,9 @@ cron.{{ task }}:
         {% if 'daymonth' in task_options %}
         - daymonth: {{ task_options.daymonth }}
         {% endif %}
+        {% if 'month' in task_options %}
+        - month: {{ task_options.month }}
+        {% endif %}
         {% if 'dayweek' in task_options %}
         - dayweek: {{ task_options.dayweek }}
         {% endif %}
