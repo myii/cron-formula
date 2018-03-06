@@ -13,19 +13,19 @@ cron.{{ task }}:
         - user: {{ task_options.user|default('root') }}
         {% endif %}
         {% if 'minute' in task_options %}
-        - minute: {{ task_options.minute }}
+        - minute: '{{ task_options.minute }}'
         {% endif %}
         {% if 'hour' in task_options %}
-        - hour: {{ task_options.hour }}
+        - hour: '{{ task_options.hour }}'
         {% endif %}
         {% if 'daymonth' in task_options %}
-        - daymonth: {{ task_options.daymonth }}
+        - daymonth: '{{ task_options.daymonth }}'
         {% endif %}
         {% if 'month' in task_options %}
-        - month: {{ task_options.month }}
+        - month: '{{ task_options.month }}'
         {% endif %}
         {% if 'dayweek' in task_options %}
-        - dayweek: {{ task_options.dayweek }}
+        - dayweek: '{{ task_options.dayweek }}'
         {% endif %}
         {% if 'commented' in task_options and task_options.commented %}
         - commented: True
