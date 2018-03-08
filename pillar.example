@@ -25,3 +25,9 @@ cron:
             user: 'root'
             special: '@hourly'
             comment: 'comment3'
+        task4:
+            type: 'present' # run every 5 minutes
+            user: 'root'
+            minute: '*/5'
+            hour: '*'
+            comment: 'comment4'
