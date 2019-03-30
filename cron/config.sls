@@ -4,7 +4,7 @@
 {% from "cron/map.jinja" import cron_settings with context %}
 
 {% if 'tasks' in cron_settings %}
-{% for task,task_options in cron_settings.tasks.iteritems() %}
+{% for task,task_options in cron_settings.tasks.items() %}
 
 cron.{{ task }}:
     cron.{{ task_options.type|default('present') }}:
