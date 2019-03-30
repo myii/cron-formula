@@ -4,5 +4,5 @@
 {% from "cron/map.jinja" import cron_settings with context %}
 
 cron.install:
-    pkg.installed:
-        - name: {{ cron_settings.pkg }}
+  pkg.installed:
+    - name: {{ cron_settings.pkg }}

@@ -2,6 +2,6 @@
 # vim: ft=sls
 
 include:
-    - cron.install
-    - cron.config
-    - cron.service
+  - cron.install
+  - cron.config
+  - cron.service
