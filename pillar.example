@@ -27,6 +27,7 @@ cron:
       comment: 'comment3'
     task4:
       type: 'present'  # run every 5 minutes
+      name: 'echo task4 > /tmp/test4'
       user: 'root'
       minute: '*/5'
       hour: '*'
