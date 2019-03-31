@@ -8,7 +8,7 @@
 
 cron.{{ task }}:
   cron.{{ task_options.type|default('present') }}:
-    - name: '{{ task_options.name }}'
+    - name: {{ task_options.name }}
     {%- if 'user' in task_options %}
     - user: {{ task_options.user|default('root') }}
     {%- endif %}
@@ -35,7 +35,7 @@ cron.{{ task }}:
     {%- endif %}
     - identifier: '{{ task }}'
     {%- if 'comment' in task_options %}
-    - comment: '{{ task_options.comment }}'
+    - comment: {{ task_options.comment }}
     {%- endif %}
 {%- endfor %}
 {%- endif %}
