@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{%- from "cron/map.jinja" import cron_settings with context %}
+{#- Get the `tplroot` from `tpldir` #}
+{%- set tplroot = tpldir.split('/')[0] %}
+{%- from tplroot ~ "/map.jinja" import cron with context %}
 
-{%- if 'tasks' in cron_settings %}
-{%- for task,task_options in cron_settings.tasks.items() %}
+{%- if 'tasks' in cron %}
+  {%- for task,task_options in cron.tasks.items() %}
 
 cron.{{ task }}:
   cron.{{ task_options.type|default('present') }}:
@@ -37,5 +39,6 @@ cron.{{ task }}:
     {%- if 'comment' in task_options %}
     - comment: {{ task_options.comment }}
     {%- endif %}
-{%- endfor %}
+
+  {%- endfor %}
 {%- endif %}
