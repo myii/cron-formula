@@ -1,5 +1,6 @@
+---
 cron:
-  enabled: True      # Default
+  enabled: true      # Default
   lookup:            # Not needed, just if you want to use another cron program
     pkg: cronie
   tasks:
