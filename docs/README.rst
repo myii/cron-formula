@@ -49,7 +49,7 @@ Available states
 ^^^^^^^^
 Installs and configures the cron package.
 
-``cron.install``
+``cron.package``
 ^^^^^^^^^^^^^^^^
 Installs the cron package.
 
