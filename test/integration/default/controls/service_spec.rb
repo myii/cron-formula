@@ -7,6 +7,14 @@ control 'Cron service' do
     case os[:family]
     when 'debian', 'suse'
       'cron'
+    # Catch remaining `linux` platforms to identify by `name` at the end
+    when 'linux'
+      case os[:name]
+      when 'arch'
+        'cronie'
+      else
+        'crond'
+      end
     else
       'crond'
     end
