@@ -3,13 +3,13 @@
 
 {%- from "cron/saltcheck-tests/map.jinja" import cron with context %}
 
-cron.service:
+{%- set service_function = 'disabled' %}
 {%- if 'enabled' not in cron or ( 'enabled' in cron and cron.enabled ) %}
-  service.running:
-    - name: {{ cron.service }}
-    - enable: True
-{%- else %}
-  service.dead:
-    - name: {{ cron.service }}
-    - enable: False
+{%-   set service_function = 'enabled' %}
 {%- endif %}
+
+verify_cron.service:
+  module_and_function: service.{{ service_function }}
+  args:
+    - {{ cron.service }}
+  assertion: assertTrue                                                   
