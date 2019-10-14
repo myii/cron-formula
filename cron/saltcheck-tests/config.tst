@@ -24,7 +24,7 @@ validate_cron.{{ task }}_minute:
     - {{ task }}                                                          
   assertion: assertEqual                                                  
   assertion_section: minute                                               
-  expected-return: {{ task_options.minute }}                              
+  expected-return: '{{ task_options.minute }}'
       {%- endif %}                                                        
                                                                           
       {%- if 'hour' in task_options %}                                    
@@ -35,7 +35,7 @@ validate_cron.{{ task }}_hour:
     - {{ task }}                                                          
   assertion_section: hour                                                 
   assertion: assertEqual                                                  
-  expected-return: {{ task_options.hour }}                                
+  expected-return: '{{ task_options.hour }}'
       {%- endif %}                                                        
                                                                           
       {%- if 'daymonth' in task_options %}                                
@@ -46,10 +46,10 @@ validate_cron.{{ task }}_daymonth:
     - {{ task }}                                                          
   assertion_section: daymonth                                             
   assertion: assertEqual                                                  
-  expected-return: {{ task_options.daymonth }}                            
+  expected-return: '{{ task_options.daymonth }}'
       {%- endif %}                                                        
                                                                           
-      {%- if 'month' in task_options %}                                   
+      {%- if 'month' in task_options %}
 validate_cron.{{ task }}_month:                                           
   module_and_function: cron.get_entry                                     
   args:                                                                   
@@ -57,7 +57,7 @@ validate_cron.{{ task }}_month:
     - {{ task }}                                                          
   assertion_section: month                                                
   assertion: assertEqual                                                  
-  expected-return:  {{ task_options.month }}                              
+  expected-return: '{{ task_options.month }}'
       {%- endif %}                                                        
                                                                           
       {%- if 'dayweek' in task_options %}                                 
@@ -68,7 +68,7 @@ validate_cron.{{ task }}_dayweek:
     - {{ task }}                                                          
   assertion_section: dayweek                                              
   assertion: assertEqual                                                  
-  expected-return: {{ task_options.dayweek }}                             
+  expected-return: '{{ task_options.dayweek }}'
       {%- endif %}                                                        
                                                                           
       {%- if 'comment' in task_options %}                                 
@@ -100,7 +100,7 @@ validate_cron.{{ task }}_absent:
     - {{ task_options.user|default('root') }}                             
     - {{ task }}                                                          
   assertion: assertFalse                                                  
-  {%- endif %}                                                            
+  {%- endif %}
                                                                           
   {%- endfor %}                                                           
-{%- endif %}                                                              
+{%- endif %}
