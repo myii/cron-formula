@@ -1,5 +1,7 @@
+# -*- coding: utf-8 -*-
+# vim: ft=sls
 
-m "cron/map.jinja" import cron_settings with context %}
+{%- from "cron/map.jinja" import cron_settings with context %}
 
 verify_cron.install:
   module_and_function: pkg.version
