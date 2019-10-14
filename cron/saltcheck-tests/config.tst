@@ -4,9 +4,9 @@
 {%- from "cron/saltcheck-tests/map.jinja" import cron with context %}
 
 {%- if 'tasks' in cron %}
-  {%- for task,task_options in cron.tasks.items() %}
+{%-   for task, task_options in cron.tasks.items() %}
 
-    {%- if task_options.type == 'present' %}
+{%-     if task_options.type == 'present' %}
 validate_cron.{{ task }}_exists:
   module_and_function: cron.get_entry
   args:
@@ -16,7 +16,7 @@ validate_cron.{{ task }}_exists:
   assertion_section: identifier
   expected-return: {{ task }}
 
-      {%- if 'minute' in task_options %}
+{%-       if 'minute' in task_options %}
 validate_cron.{{ task }}_minute:
   module_and_function: cron.get_entry
   args:
@@ -25,9 +25,9 @@ validate_cron.{{ task }}_minute:
   assertion: assertEqual
   assertion_section: minute
   expected-return: '{{ task_options.minute }}'
-      {%- endif %}
+{%-       endif %}
 
-      {%- if 'hour' in task_options %}
+{%-       if 'hour' in task_options %}
 validate_cron.{{ task }}_hour:
   module_and_function: cron.get_entry
   args:
@@ -36,9 +36,9 @@ validate_cron.{{ task }}_hour:
   assertion_section: hour
   assertion: assertEqual
   expected-return: '{{ task_options.hour }}'
-      {%- endif %}
+{%-       endif %}
 
-      {%- if 'daymonth' in task_options %}
+{%-       if 'daymonth' in task_options %}
 validate_cron.{{ task }}_daymonth:
   module_and_function: cron.get_entry
   args:
@@ -47,9 +47,9 @@ validate_cron.{{ task }}_daymonth:
   assertion_section: daymonth
   assertion: assertEqual
   expected-return: '{{ task_options.daymonth }}'
-      {%- endif %}
+{%-       endif %}
 
-      {%- if 'month' in task_options %}
+{%-       if 'month' in task_options %}
 validate_cron.{{ task }}_month:
   module_and_function: cron.get_entry
   args:
@@ -58,9 +58,9 @@ validate_cron.{{ task }}_month:
   assertion_section: month
   assertion: assertEqual
   expected-return: '{{ task_options.month }}'
-      {%- endif %}
+{%-       endif %}
 
-      {%- if 'dayweek' in task_options %}
+{%-       if 'dayweek' in task_options %}
 validate_cron.{{ task }}_dayweek:
   module_and_function: cron.get_entry
   args:
@@ -69,9 +69,9 @@ validate_cron.{{ task }}_dayweek:
   assertion_section: dayweek
   assertion: assertEqual
   expected-return: '{{ task_options.dayweek }}'
-      {%- endif %}
+{%-       endif %}
 
-      {%- if 'comment' in task_options %}
+{%-       if 'comment' in task_options %}
 validate_cron.{{ task }}_comment:
   module_and_function: cron.get_entry
   args:
@@ -80,9 +80,9 @@ validate_cron.{{ task }}_comment:
   assertion_section: comment
   assertion: assertEqual
   expected-return: {{ task_options.comment }}
-      {%- endif %}
+{%-       endif %}
 
-      {%- if 'commented' in task_options and task_options.commented %}
+{%-       if 'commented' in task_options and task_options.commented %}
 validate_cron.{{ task }}_commented:
   module_and_function: cron.get_entry
   args:
@@ -90,17 +90,17 @@ validate_cron.{{ task }}_commented:
     - {{ task }}
   assertion_section: commented
   assertion: assertTrue
-      {%- endif %}
-    {%- endif %}
+{%-       endif %}
+{%-     endif %}
 
-  {%- if task_options.type == 'absent' %}
+{%-     if task_options.type == 'absent' %}
 validate_cron.{{ task }}_absent:
   module_and_function: cron.get_entry
   args:
     - {{ task_options.user|default('root') }}
     - {{ task }}
   assertion: assertFalse
-  {%- endif %}
+{%-     endif %}
 
-  {%- endfor %}
+{%-   endfor %}
 {%- endif %}

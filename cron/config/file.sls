@@ -6,7 +6,7 @@
 {%- from tplroot ~ "/map.jinja" import cron with context %}
 
 {%- if 'tasks' in cron %}
-  {%- for task,task_options in cron.tasks.items() %}
+  {%- for task, task_options in cron.tasks.items() %}
 
 cron.{{ task }}:
   cron.{{ task_options.type|default('present') }}:
