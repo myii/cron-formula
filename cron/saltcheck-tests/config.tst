@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{%- from "cron/saltcheck-tests/map.jinja" import cron_settings with context %}
+{%- from "cron/saltcheck-tests/map.jinja" import cron with context %}
                                                                           
-{%- if 'tasks' in cron_settings %}                                        
-  {%- for task,task_options in cron_settings.tasks.items() %}             
+{%- if 'tasks' in cron %}                                        
+  {%- for task,task_options in cron.tasks.items() %}             
                                                                           
     {%- if task_options.type == 'present' %}                              
 validate_cron.{{ task }}_exists:                                          
