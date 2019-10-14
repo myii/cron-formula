@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{%- from "cron/map.jinja" import cron_settings with context %}
+{%- from "cron/saltcheck-tests/map.jinja" import cron_settings with context %}
                                                                           
 {%- if 'tasks' in cron_settings %}                                        
   {%- for task,task_options in cron_settings.tasks.items() %}             
