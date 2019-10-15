@@ -24,7 +24,8 @@ validate_cron.{{ task }}_exists:
   assertion_section: identifier
   expected-return: {{ task }}
 
-{%-       for section in ['minute', 'hour', 'daymonth', 'month', 'dayweek', 'comment', 'special'] %}
+{#-       Note: `special` is `spec` in the module #}
+{%-       for section in ['minute', 'hour', 'daymonth', 'month', 'dayweek', 'comment', 'spec'] %}
 {%-         if section in task_options %}
 validate_cron.{{ task }}_{{ section }}:
   module_and_function: cron.get_entry

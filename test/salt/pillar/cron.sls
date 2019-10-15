@@ -21,7 +21,7 @@ cron:
       minute: random
       hour: 1
     task3:
-      type: absent
+      type: present
       name: echo task3 > /tmp/test3
       user: root
       special: '@hourly'
