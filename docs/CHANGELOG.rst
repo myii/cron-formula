@@ -2,6 +2,34 @@
 Changelog
 =========
 
+`0.2.3 <https://github.com/saltstack-formulas/cron-formula/compare/v0.2.2...v0.2.3>`_ (2019-10-15)
+------------------------------------------------------------------------------------------------------
+
+Bug Fixes
+^^^^^^^^^
+
+
+* **platform:** add support for ``Arch`` (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/a9968e3>`_\ )
+
+Continuous Integration
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+* **platform:** enable ``arch-base-latest`` (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/525ecee>`_\ )
+
+Documentation
+^^^^^^^^^^^^^
+
+
+* **contributing:** remove to use org-level file instead [skip ci] (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/c12034a>`_\ )
+* **readme:** update link to ``CONTRIBUTING`` [skip ci] (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/eccccb6>`_\ )
+
+Tests
+^^^^^
+
+
+* **pillar:** extract test pillar from ``pillar.example`` (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/482e2d1>`_\ )
+
 `0.2.2 <https://github.com/saltstack-formulas/cron-formula/compare/v0.2.1...v0.2.2>`_ (2019-10-12)
 ------------------------------------------------------------------------------------------------------
 
