@@ -6,7 +6,15 @@
 {%- if 'tasks' in cron %}
 {%-   for task, task_options in cron.tasks.items() %}
 
-{%-     if task_options.type == 'present' %}
+{%-     if task_options.type == 'absent' %}
+validate_cron.{{ task }}_absent:
+  module_and_function: cron.get_entry
+  args:
+    - {{ task_options.user|default('root') }}
+    - {{ task }}
+  assertion: assertFalse
+
+{%-     elif task_options.type == 'present' %}
 validate_cron.{{ task }}_exists:
   module_and_function: cron.get_entry
   args:
@@ -38,15 +46,6 @@ validate_cron.{{ task }}_commented:
   assertion: assertTrue
   assertion_section: commented
 {%-       endif %}
-{%-     endif %}
-
-{%-     if task_options.type == 'absent' %}
-validate_cron.{{ task }}_absent:
-  module_and_function: cron.get_entry
-  args:
-    - {{ task_options.user|default('root') }}
-    - {{ task }}
-  assertion: assertFalse
 {%-     endif %}
 
 {%-   endfor %}
