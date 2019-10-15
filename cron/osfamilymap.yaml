@@ -12,12 +12,11 @@
 ---
 Debian:
   pkg: cron
-  service: cron
 
 RedHat:
-  pkg: cronie
   service: crond
 
-Suse:
-  pkg: cronie
-  service: cron
+Suse: {}
+
+Arch:
+  service: cronie
