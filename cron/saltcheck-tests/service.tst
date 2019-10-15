@@ -8,7 +8,13 @@
 {%-   set service_function = 'enabled' %}
 {%- endif %}
 
-verify_cron.service:
+verify_cron.service_available:
+  module_and_function: service.available
+  args:
+    - {{ cron.service }}
+  assertion: assertTrue
+
+verify_cron.service_{{ service_function }}:
   module_and_function: service.{{ service_function }}
   args:
     - {{ cron.service }}
