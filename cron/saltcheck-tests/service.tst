@@ -12,4 +12,4 @@ verify_cron.service:
   module_and_function: service.{{ service_function }}
   args:
     - {{ cron.service }}
-  assertion: assertTrue
+  assertion: assertFalse
