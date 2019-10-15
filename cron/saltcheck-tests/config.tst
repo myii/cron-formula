@@ -16,71 +16,18 @@ validate_cron.{{ task }}_exists:
   assertion_section: identifier
   expected-return: {{ task }}
 
-{%-       if 'minute' in task_options %}
-validate_cron.{{ task }}_minute:
+{%-       for section in ['minute', 'hour', 'daymonth', 'month', 'dayweek', 'comment'] %}
+{%-         if section in task_options %}
+validate_cron.{{ task }}_{{ section }}:
   module_and_function: cron.get_entry
   args:
     - {{ task_options.user|default('root') }}
     - {{ task }}
   assertion: assertEqual
-  assertion_section: minute
-  expected-return: '{{ task_options.minute }}'
-{%-       endif %}
-
-{%-       if 'hour' in task_options %}
-validate_cron.{{ task }}_hour:
-  module_and_function: cron.get_entry
-  args:
-    - {{ task_options.user|default('root') }}
-    - {{ task }}
-  assertion_section: hour
-  assertion: assertEqual
-  expected-return: '{{ task_options.hour }}'
-{%-       endif %}
-
-{%-       if 'daymonth' in task_options %}
-validate_cron.{{ task }}_daymonth:
-  module_and_function: cron.get_entry
-  args:
-    - {{ task_options.user|default('root') }}
-    - {{ task }}
-  assertion_section: daymonth
-  assertion: assertEqual
-  expected-return: '{{ task_options.daymonth }}'
-{%-       endif %}
-
-{%-       if 'month' in task_options %}
-validate_cron.{{ task }}_month:
-  module_and_function: cron.get_entry
-  args:
-    - {{ task_options.user|default('root') }}
-    - {{ task }}
-  assertion_section: month
-  assertion: assertEqual
-  expected-return: '{{ task_options.month }}'
-{%-       endif %}
-
-{%-       if 'dayweek' in task_options %}
-validate_cron.{{ task }}_dayweek:
-  module_and_function: cron.get_entry
-  args:
-    - {{ task_options.user|default('root') }}
-    - {{ task }}
-  assertion_section: dayweek
-  assertion: assertEqual
-  expected-return: '{{ task_options.dayweek }}'
-{%-       endif %}
-
-{%-       if 'comment' in task_options %}
-validate_cron.{{ task }}_comment:
-  module_and_function: cron.get_entry
-  args:
-    - {{ task_options.user|default('root') }}
-    - {{ task }}
-  assertion_section: comment
-  assertion: assertEqual
-  expected-return: {{ task_options.comment }}
-{%-       endif %}
+  assertion_section: {{ section }}
+  expected-return: '{{ task_options.get(section) }}'
+{%-         endif %}
+{%-       endfor %}
 
 {%-       if 'commented' in task_options and task_options.commented %}
 validate_cron.{{ task }}_commented:
