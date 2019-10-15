@@ -11,34 +11,17 @@
 cron.{{ task }}:
   cron.{{ task_options.type|default('present') }}:
     - name: {{ task_options.name }}
+    - identifier: '{{ task }}'
     {%- if 'user' in task_options %}
     - user: {{ task_options.user|default('root') }}
     {%- endif %}
-    {%- if 'minute' in task_options %}
-    - minute: '{{ task_options.minute }}'
-    {%- endif %}
-    {%- if 'hour' in task_options %}
-    - hour: '{{ task_options.hour }}'
-    {%- endif %}
-    {%- if 'daymonth' in task_options %}
-    - daymonth: '{{ task_options.daymonth }}'
-    {%- endif %}
-    {%- if 'month' in task_options %}
-    - month: '{{ task_options.month }}'
-    {%- endif %}
-    {%- if 'dayweek' in task_options %}
-    - dayweek: '{{ task_options.dayweek }}'
-    {%- endif %}
+    {%- for section in ['minute', 'hour', 'daymonth', 'month', 'dayweek', 'comment', 'special'] %}
+    {%-   if section in task_options %}
+    - {{ section }}: '{{ task_options.get(section) }}'
+    {%-   endif %}
+    {%- endfor %}
     {%- if 'commented' in task_options and task_options.commented %}
     - commented: True
     {%- endif %}
-    {%- if 'special' in task_options %}
-    - special: '{{ task_options.special }}'
-    {%- endif %}
-    - identifier: '{{ task }}'
-    {%- if 'comment' in task_options %}
-    - comment: {{ task_options.comment }}
-    {%- endif %}
-
   {%- endfor %}
 {%- endif %}
