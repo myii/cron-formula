@@ -88,8 +88,8 @@ validate_cron.{{ task }}_commented:
   args:
     - {{ task_options.user|default('root') }}
     - {{ task }}
-  assertion_section: commented
   assertion: assertTrue
+  assertion_section: commented
 {%-       endif %}
 {%-     endif %}
 
