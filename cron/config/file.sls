@@ -12,9 +12,7 @@ cron.{{ task }}:
   cron.{{ task_options.type|d('present') }}:
     - name: {{ task_options.name }}
     - identifier: '{{ task }}'
-    {%- if 'user' in task_options %}
     - user: {{ task_options.user|d('root') }}
-    {%- endif %}
     {%- for section in ['minute', 'hour', 'daymonth', 'month', 'dayweek', 'comment', 'special'] %}
     {%-   if section in task_options %}
     - {{ section }}: '{{ task_options.get(section) }}'
