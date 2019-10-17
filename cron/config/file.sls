@@ -5,9 +5,8 @@
 {%- set tplroot = tpldir.split('/')[0] %}
 {%- from tplroot ~ "/map.jinja" import cron with context %}
 
-{%- if 'tasks' in cron %}
-{%-   for task, task_options in cron.tasks.items() %}
-{%-     set cron_type = task_options.type|d('present') %}
+{%- for task, task_options in cron.get('tasks', {}).items() %}
+{%-   set cron_type = task_options.type|d('present') %}
 
 cron.{{ task }}:
   cron.{{ cron_type }}:
@@ -23,5 +22,4 @@ cron.{{ task }}:
     {%-   endfor %}
     {%- endif %}
 
-{%-   endfor %}
-{%- endif %}
+{%- endfor %}

@@ -49,24 +49,23 @@
         },
     } %}
 
-{%- if 'tasks' in cron %}
-{%-   for task, task_options in cron.tasks.items() %}
-{%-     set cron_type = task_options.type|d('present') %}
+{%- for task, task_options in cron.get('tasks', {}).items() %}
+{%-   set cron_type = task_options.type|d('present') %}
 
 validate_cron.{{ task }}_{{ cron_type }}:
   module_and_function: cron.get_entry
   args:
     - {{ task_options.user|d('root') }}
     - {{ task }}
-  {%-   if cron_type == 'absent' %}
+  {%- if cron_type == 'absent' %}
   assertion: assertFalse
-  {%-   else %}
+  {%- else %}
   assertion: assertEqual
   assertion_section: identifier
   expected-return: {{ task }}
-  {%-   endif %}
+  {%- endif %}
 
-{%-     if cron_type == 'present' %}
+{%-   if cron_type == 'present' %}
 validate_cron.{{ task }}_commented:
   module_and_function: cron.get_entry
   args:
@@ -76,14 +75,14 @@ validate_cron.{{ task }}_commented:
   assertion_section: commented
 
 {#-       Note: `special` is `spec` in the module #}
-{%-       for section in ['minute', 'hour', 'daymonth', 'month', 'dayweek', 'comment', 'spec'] %}
-{%-         if section in task_options %}
-{%-           set assertion = 'assertEqual' %}
-{%-           set expected = task_options[section] %}
-{%-           if expected == 'random' %}
-{%-             set assertion = 'assertLessEqual' %}
-{%-             set expected = 0 %}
-{%-           endif %}
+{%-     for section in ['minute', 'hour', 'daymonth', 'month', 'dayweek', 'comment', 'spec'] %}
+{%-       if section in task_options %}
+{%-         set assertion = 'assertEqual' %}
+{%-         set expected = task_options[section] %}
+{%-         if expected == 'random' %}
+{%-           set assertion = 'assertLessEqual' %}
+{%-           set expected = 0 %}
+{%-         endif %}
 validate_cron.{{ task }}_{{ section }}:
   module_and_function: cron.get_entry
   args:
@@ -92,9 +91,8 @@ validate_cron.{{ task }}_{{ section }}:
   assertion: {{ assertion }}
   assertion_section: {{ section }}
   expected-return: '{{ expected }}'
-{%-         endif %}
-{%-       endfor %}
-{%-     endif %}
+{%-       endif %}
+{%-     endfor %}
+{%-   endif %}
 
-{%-   endfor %}
-{%- endif %}
+{%- endfor %}
