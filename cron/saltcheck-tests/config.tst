@@ -1,7 +1,53 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{%- set cron = salt['pillar.get']('cron', {}) %}
+{%- set cron = {
+        'enabled': true,
+        'tasks': {
+            'task1': {
+                'type': 'present',
+                'name': 'echo test > /tmp/test',
+                'user': 'root',
+                'minute': 0,
+                'hour': 0,
+                'daymonth': 7,
+                'month': 1,
+                'dayweek': 6,
+                'comment': 'comment1',
+                'commented': false,
+            },
+            'task2': {
+                'type': 'absent',
+                'name': 'echo task2 > /tmp/test2',
+                'user': 'root',
+                'minute': 'random',
+                'hour': 1,
+            },
+            'task3': {
+                'type': 'present',
+                'name': 'echo task3 > /tmp/test3',
+                'user': 'root',
+                'special': '@hourly',
+                'comment': 'comment3',
+            },
+            'task4': {
+                'type': 'present',
+                'name': 'echo task4 > /tmp/test4',
+                'user': 'root',
+                'minute': '*/5',
+                'hour': '*',
+                'comment': 'comment4',
+            },
+            'task5': {
+                'type': 'present',
+                'name': 'echo task5 > /tmp/test5',
+                'user': 'root',
+                'minute': 'random',
+                'hour': 1,
+                'commented': true,
+            },
+        },
+    } %}
 
 {%- if 'tasks' in cron %}
 {%-   for task, task_options in cron.tasks.items() %}
