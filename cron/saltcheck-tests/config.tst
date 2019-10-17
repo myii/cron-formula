@@ -74,7 +74,7 @@ validate_cron.{{ task }}_exists:
 {%-       for section in ['minute', 'hour', 'daymonth', 'month', 'dayweek', 'comment', 'spec'] %}
 {%-         if section in task_options %}
 {%-           set assertion = 'assertEqual' %}
-{%-           set expected = task_options.get(section) %}
+{%-           set expected = task_options[section] %}
 {%-           if expected == 'random' %}
 {%-             set assertion = 'assertLessEqual' %}
 {%-             set expected = 0 %}
