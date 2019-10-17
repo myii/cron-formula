@@ -10,7 +10,7 @@
 validate_cron.{{ task }}_absent:
   module_and_function: cron.get_entry
   args:
-    - {{ task_options.user|default('root') }}
+    - {{ task_options.user|d('root') }}
     - {{ task }}
   assertion: assertFalse
 
@@ -18,7 +18,7 @@ validate_cron.{{ task }}_absent:
 validate_cron.{{ task }}_exists:
   module_and_function: cron.get_entry
   args:
-    - {{ task_options.user|default('root') }}
+    - {{ task_options.user|d('root') }}
     - {{ task }}
   assertion: assertEqual
   assertion_section: identifier
@@ -30,7 +30,7 @@ validate_cron.{{ task }}_exists:
 validate_cron.{{ task }}_{{ section }}:
   module_and_function: cron.get_entry
   args:
-    - {{ task_options.user|default('root') }}
+    - {{ task_options.user|d('root') }}
     - {{ task }}
   assertion: assertEqual
   assertion_section: {{ section }}
@@ -42,7 +42,7 @@ validate_cron.{{ task }}_{{ section }}:
 validate_cron.{{ task }}_commented:
   module_and_function: cron.get_entry
   args:
-    - {{ task_options.user|default('root') }}
+    - {{ task_options.user|d('root') }}
     - {{ task }}
   assertion: assertTrue
   assertion_section: commented

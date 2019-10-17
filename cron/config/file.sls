@@ -9,11 +9,11 @@
   {%- for task, task_options in cron.tasks.items() %}
 
 cron.{{ task }}:
-  cron.{{ task_options.type|default('present') }}:
+  cron.{{ task_options.type|d('present') }}:
     - name: {{ task_options.name }}
     - identifier: '{{ task }}'
     {%- if 'user' in task_options %}
-    - user: {{ task_options.user|default('root') }}
+    - user: {{ task_options.user|d('root') }}
     {%- endif %}
     {%- for section in ['minute', 'hour', 'daymonth', 'month', 'dayweek', 'comment', 'special'] %}
     {%-   if section in task_options %}
