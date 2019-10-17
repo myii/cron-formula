@@ -44,15 +44,17 @@ validate_cron.{{ task }}_{{ section }}:
 {%-         endif %}
 {%-       endfor %}
 
-{%-       if 'commented' in task_options and task_options.commented %}
+{%-       set assertion = 'assertFalse' %}
+{%-       if task_options.commented|d(False) %}
+{%-         set assertion = 'assertTrue' %}
+{%-       endif %}
 validate_cron.{{ task }}_commented:
   module_and_function: cron.get_entry
   args:
     - {{ task_options.user|d('root') }}
     - {{ task }}
-  assertion: assertTrue
+  assertion: {{ assertion }}
   assertion_section: commented
-{%-       endif %}
 {%-     endif %}
 
 {%-   endfor %}

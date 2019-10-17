@@ -20,7 +20,7 @@ cron.{{ task }}:
     - {{ section }}: '{{ task_options.get(section) }}'
     {%-   endif %}
     {%- endfor %}
-    {%- if 'commented' in task_options and task_options.commented %}
+    {%- if task_options.commented|d(False) %}
     - commented: True
     {%- endif %}
   {%- endfor %}
