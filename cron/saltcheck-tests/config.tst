@@ -27,14 +27,20 @@ validate_cron.{{ task }}_exists:
 {#-       Note: `special` is `spec` in the module #}
 {%-       for section in ['minute', 'hour', 'daymonth', 'month', 'dayweek', 'comment', 'spec'] %}
 {%-         if section in task_options %}
+{%-           set assertion = 'assertEqual' %}
+{%-           set expected = task_options.get(section) %}
+{%-           if expected == 'random' %}
+{%-             set assertion = 'assertLessEqual' %}
+{%-             set expected = 0 %}
+{%-           endif %}
 validate_cron.{{ task }}_{{ section }}:
   module_and_function: cron.get_entry
   args:
     - {{ task_options.user|d('root') }}
     - {{ task }}
-  assertion: assertEqual
+  assertion: {{ assertion }}
   assertion_section: {{ section }}
-  expected-return: '{{ task_options.get(section) }}'
+  expected-return: '{{ expected }}'
 {%-         endif %}
 {%-       endfor %}
 
