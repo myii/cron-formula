@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{%- from "cron/saltcheck-tests/map.jinja" import cron with context %}
+{%- set cron = salt['pillar.get']('cron', {}) %}
 
 {%- if 'tasks' in cron %}
 {%-   for task, task_options in cron.tasks.items() %}
