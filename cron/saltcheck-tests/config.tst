@@ -51,24 +51,29 @@
 
 {%- if 'tasks' in cron %}
 {%-   for task, task_options in cron.tasks.items() %}
+{%-     set cron_type = task_options.type|d('present') %}
 
-{%-     if task_options.type == 'absent' %}
-validate_cron.{{ task }}_absent:
+validate_cron.{{ task }}_{{ cron_type }}:
   module_and_function: cron.get_entry
   args:
     - {{ task_options.user|d('root') }}
     - {{ task }}
+  {%-   if cron_type == 'absent' %}
   assertion: assertFalse
-
-{%-     elif task_options.type == 'present' %}
-validate_cron.{{ task }}_exists:
-  module_and_function: cron.get_entry
-  args:
-    - {{ task_options.user|d('root') }}
-    - {{ task }}
+  {%-   else %}
   assertion: assertEqual
   assertion_section: identifier
   expected-return: {{ task }}
+  {%-   endif %}
+
+{%-     if cron_type == 'present' %}
+validate_cron.{{ task }}_commented:
+  module_and_function: cron.get_entry
+  args:
+    - {{ task_options.user|d('root') }}
+    - {{ task }}
+  assertion: {{ 'assertTrue' if task_options.commented|d(False) else 'assertFalse'}}
+  assertion_section: commented
 
 {#-       Note: `special` is `spec` in the module #}
 {%-       for section in ['minute', 'hour', 'daymonth', 'month', 'dayweek', 'comment', 'spec'] %}
@@ -89,18 +94,6 @@ validate_cron.{{ task }}_{{ section }}:
   expected-return: '{{ expected }}'
 {%-         endif %}
 {%-       endfor %}
-
-{%-       set assertion = 'assertFalse' %}
-{%-       if task_options.commented|d(False) %}
-{%-         set assertion = 'assertTrue' %}
-{%-       endif %}
-validate_cron.{{ task }}_commented:
-  module_and_function: cron.get_entry
-  args:
-    - {{ task_options.user|d('root') }}
-    - {{ task }}
-  assertion: {{ assertion }}
-  assertion_section: commented
 {%-     endif %}
 
 {%-   endfor %}
