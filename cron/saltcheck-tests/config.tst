@@ -77,20 +77,15 @@ validate_cron.{{ task }}_commented:
 {#-       Note: `special` is `spec` in the module #}
 {%-     for section in ['minute', 'hour', 'daymonth', 'month', 'dayweek', 'comment', 'spec'] %}
 {%-       if section in task_options %}
-{%-         set assertion = 'assertEqual' %}
 {%-         set expected = task_options[section] %}
-{%-         if expected == 'random' %}
-{%-           set assertion = 'assertLessEqual' %}
-{%-           set expected = 0 %}
-{%-         endif %}
 validate_cron.{{ task }}_{{ section }}:
   module_and_function: cron.get_entry
   args:
     - {{ task_options.user|d('root') }}
     - {{ task }}
-  assertion: {{ assertion }}
+  assertion: {{ 'assertLessEqual' if expected == 'random' else 'assertEqual' }}
   assertion_section: {{ section }}
-  expected-return: '{{ expected }}'
+  expected-return: '{{ 0 if expected == 'random' else expected }}'
 {%-       endif %}
 {%-     endfor %}
 {%-   endif %}
