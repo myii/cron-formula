@@ -1,29 +1,27 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{%- from "cron/saltcheck-tests/map.jinja" import cron with context %}
-
-{%- set service_function = 'disabled' %}
-{%- set service_running = 'assertFalse' %}
-{%- if 'enabled' not in cron or ( 'enabled' in cron and cron.enabled ) %}
-{%-   set service_function = 'enabled' %}
-{%-   set service_running = 'assertTrue' %}
+{%- set service_name = 'crond' %}
+{%- if grains.os_family in ['Debian', 'Suse'] %}
+{%-   set service_name = 'cron' %}
+{%- elif grains.os_family in ['Arch'] %}
+{%-   set service_name = 'cronie' %}
 {%- endif %}
 
 verify_cron.service_available:
   module_and_function: service.available
   args:
-    - {{ cron.service }}
+    - {{ service_name }}
   assertion: assertTrue
 
-verify_cron.service_{{ service_function }}:
-  module_and_function: service.{{ service_function }}
+verify_cron.service_enabled:
+  module_and_function: service.enabled
   args:
-    - {{ cron.service }}
+    - {{ service_name }}
   assertion: assertTrue
 
 verify_cron.service_running:
   module_and_function: service.status
   args:
-    - {{ cron.service }}
-  assertion: {{ service_running }}
+    - {{ service_name }}
+  assertion: assertTrue

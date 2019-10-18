@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{%- from "cron/saltcheck-tests/map.jinja" import cron with context %}
+{%- set package_name = 'cronie' %}
+{%- if grains.os_family in ['Debian'] %}
+{%-   set package_name = 'cron' %}
+{%- endif %}
 
 verify_cron.package:
   module_and_function: pkg.version
   args:
-    - {{ cron.pkg }}
+    - {{ package_name }}
   assertion: assertNotEmpty
