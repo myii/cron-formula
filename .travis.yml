@@ -13,7 +13,29 @@ cache: bundler
 
 ## Script to run for the test stage
 script:
+  # yamllint disable rule:line-length
+  # Converge and verify the instance; `saltcheck` relies upon the `converge` as well
   - bin/kitchen verify "${INSTANCE}"
+  # If a `develop` instance, get the appropriate version of `saltcheck.py` (temporary)
+  # Likewise, use a custom `cron.py` temporarily until the upstream PR is merged:
+  # - https://github.com/saltstack/salt/pull/55016
+  - if [ ! -z $(echo "${INSTANCE}" | grep \\-develop-) ]; then
+      bin/kitchen exec "${INSTANCE}" -c
+        "sudo curl -o \$(find /usr/lib/ -type d -name modules | grep packages/salt/modules)/saltcheck.py
+        https://raw.githubusercontent.com/myii/salt/fix/add-retcode/salt/modules/saltcheck.py";
+      bin/kitchen exec "${INSTANCE}" -c
+        "sudo curl -o \$(find /usr/lib/ -type d -name modules | grep packages/salt/modules)/cron.py
+        https://raw.githubusercontent.com/myii/salt/fix/add-retcode/salt/modules/cron.py";
+    fi
+  # If a `develop` instance, run all of the `saltcheck` tests
+  - if [ ! -z $(echo "${INSTANCE}" | grep \\-develop-) ]; then
+      bin/kitchen exec "${INSTANCE}" -c
+        "sudo salt-call
+        --config-dir=/tmp/kitchen/etc/salt
+        saltcheck.run_state_tests
+        cron check_all=True";
+    fi
+  # yamllint enable rule:line-length
 
 ## Stages and jobs matrix
 stages:
@@ -33,7 +55,7 @@ jobs:
       script:
         # Install and run `salt-lint`
         - pip install --user salt-lint
-        - git ls-files | grep '\.sls$\|\.jinja$\|\.j2$\|\.tmpl$'
+        - git ls-files | grep '\.sls$\|\.jinja$\|\.j2$\|\.tmpl$\|\.tst$'
                        | xargs -I {} salt-lint {}
         # Install and run `yamllint`
         # Need at least `v1.17.0` for the `yaml-files` setting
