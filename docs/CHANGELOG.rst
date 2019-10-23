@@ -2,6 +2,64 @@
 Changelog
 =========
 
+`0.2.4 <https://github.com/saltstack-formulas/cron-formula/compare/v0.2.3...v0.2.4>`_ (2019-10-23)
+------------------------------------------------------------------------------------------------------
+
+Bug Fixes
+^^^^^^^^^
+
+
+* **saltcheck:** fix broken import and standardise across test files (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/7911b71>`_\ )
+* **saltcheck:** fix invalid ``service`` test (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/677c956>`_\ )
+* **saltcheck:** remove trailing spaces (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/aada0ae>`_\ )
+* **saltcheck:** replace ``map.jinja`` references with InSpec conditionals (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/7e9e619>`_\ )
+* **saltcheck:** update for ``cron`` instead of ``cron_settings`` (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/26cfa4f>`_\ )
+
+Code Refactoring
+^^^^^^^^^^^^^^^^
+
+
+* **config:** minimise and standardise between ``.sls`` & ``.tst`` (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/18585bd>`_\ )
+* **config:** remove duplication in using a loop (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/652ebff>`_\ )
+* **jinja:** used shortened form of ``|default`` filter (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/a0f891e>`_\ )
+* **saltcheck:** relocate ``.tst`` files according to 1:1 ``.sls`` files (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/ee65236>`_\ ), closes `/github.com/saltstack-formulas/cron-formula/pull/4#issuecomment-544140377 <https://github.com//github.com/saltstack-formulas/cron-formula/pull/4/issues/issuecomment-544140377>`_
+* **saltcheck:** use ``package.tst`` instead of ``install.tst`` (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/d2c9544>`_\ )
+* **saltcheck:** use root-level ``saltcheck-tests`` directory (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/6e54c3f>`_\ )
+
+Continuous Integration
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+* **travis:** obtain ``saltcheck.py`` and run the tests (only on ``develop``\ ) (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/8ae46e5>`_\ )
+* **travis:** run ``salt-lint`` for ``.tst`` files as well (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/baab964>`_\ )
+* **travis:** standardise ``saltcheck`` comments (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/e23276b>`_\ )
+* **travis:** update ``salt-lint`` config for ``v0.0.10`` [skip ci] (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/b701d79>`_\ )
+
+Styles
+^^^^^^
+
+
+* **config.tst:** rearrange Jinja statements for clarity (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/8abec54>`_\ )
+* **saltcheck:** merge ``absent`` & ``present`` into one ``if`` block (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/33f344c>`_\ )
+* **saltcheck:** use consistent order of assertions (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/88229f0>`_\ )
+
+Tests
+^^^^^
+
+
+* **pillar:** add test for ``commented`` and clarify each test (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/3d0dcb2>`_\ )
+* **pillar:** ensure ``special`` is being tested as well (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/951a959>`_\ )
+* **saltcheck:** add first tests (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/9847aff>`_\ )
+* **saltcheck:** add support for ``random`` values (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/007970f>`_\ )
+* **saltcheck:** add test for ``service.available`` (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/226eb88>`_\ )
+* **saltcheck:** add test for ``service.running`` (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/5cdc50f>`_\ )
+* **saltcheck:** avoid ``map.jinja``\ , use the test pillar instead (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/cce5e67>`_\ )
+* **saltcheck:** fix ``config`` tests (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/9225b18>`_\ )
+* **saltcheck:** remove duplication in ``config.tst`` using a loop (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/72281c7>`_\ )
+* **saltcheck:** test for ``commented`` and not ``commented`` (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/5070611>`_\ )
+* **saltcheck:** test for ``special`` in ``config.tst`` as well (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/6f2b323>`_\ )
+* **saltcheck:** use local ``map.jinja`` to workaround missing ``tpldata`` (\ ` <https://github.com/saltstack-formulas/cron-formula/commit/8845b3c>`_\ )
+
 `0.2.3 <https://github.com/saltstack-formulas/cron-formula/compare/v0.2.2...v0.2.3>`_ (2019-10-15)
 ------------------------------------------------------------------------------------------------------
 
