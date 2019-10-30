@@ -16,10 +16,10 @@ script:
   # yamllint disable rule:line-length
   # Converge and verify the instance; `saltcheck` relies upon the `converge` as well
   - bin/kitchen verify "${INSTANCE}"
-  # If a `develop` instance, get the appropriate version of `saltcheck.py` (temporary)
+  # If a `master` instance, get the appropriate version of `saltcheck.py` (temporary)
   # Likewise, use a custom `cron.py` temporarily until the upstream PR is merged:
   # - https://github.com/saltstack/salt/pull/55016
-  - if [ ! -z $(echo "${INSTANCE}" | grep \\-develop-) ]; then
+  - if [ ! -z $(echo "${INSTANCE}" | grep \\-master-) ]; then
       bin/kitchen exec "${INSTANCE}" -c
         "sudo curl -o \$(find /usr/lib/ -type d -name modules | grep packages/salt/modules)/saltcheck.py
         https://raw.githubusercontent.com/myii/salt/fix/add-retcode/salt/modules/saltcheck.py";
@@ -27,8 +27,8 @@ script:
         "sudo curl -o \$(find /usr/lib/ -type d -name modules | grep packages/salt/modules)/cron.py
         https://raw.githubusercontent.com/myii/salt/fix/add-retcode/salt/modules/cron.py";
     fi
-  # If a `develop` instance, run all of the `saltcheck` tests
-  - if [ ! -z $(echo "${INSTANCE}" | grep \\-develop-) ]; then
+  # If a `master` instance, run all of the `saltcheck` tests
+  - if [ ! -z $(echo "${INSTANCE}" | grep \\-master-) ]; then
       bin/kitchen exec "${INSTANCE}" -c
         "sudo salt-call
         --config-dir=/tmp/kitchen/etc/salt
@@ -73,31 +73,33 @@ jobs:
     # Make sure the instances listed below match up with
     # the `platforms` defined in `kitchen.yml`
     - env: INSTANCE=default-debian-10-master-py3
-    # - env: INSTANCE=default-ubuntu-1804-develop-py3
-    # - env: INSTANCE=default-centos-7-develop-py3
-    # - env: INSTANCE=default-fedora-30-develop-py3
-    # - env: INSTANCE=default-opensuse-leap-15-develop-py3
-    # - env: INSTANCE=default-amazonlinux-2-develop-py2
-    # - env: INSTANCE=default-arch-base-latest-develop-py2
+    # - env: INSTANCE=default-ubuntu-1804-master-py3
+    # - env: INSTANCE=default-centos-8-master-py3
+    # - env: INSTANCE=default-fedora-31-master-py3
+    # - env: INSTANCE=default-opensuse-leap-151-master-py3
+    # - env: INSTANCE=default-amazonlinux-2-master-py2
+    # - env: INSTANCE=default-arch-base-latest-master-py2
+    # - env: INSTANCE=default-debian-10-2019-2-py3
     # - env: INSTANCE=default-debian-9-2019-2-py3
     - env: INSTANCE=default-ubuntu-1804-2019-2-py3
-    # - env: INSTANCE=default-centos-7-2019-2-py3
-    # - env: INSTANCE=default-fedora-30-2019-2-py3
-    # - env: INSTANCE=default-opensuse-leap-15-2019-2-py3
+    # - env: INSTANCE=default-centos-8-2019-2-py3
+    # - env: INSTANCE=default-fedora-31-2019-2-py3
+    - env: INSTANCE=default-opensuse-leap-151-2019-2-py3
+    # - env: INSTANCE=default-centos-7-2019-2-py2
     - env: INSTANCE=default-amazonlinux-2-2019-2-py2
-    - env: INSTANCE=default-arch-base-latest-2019-2-py2
+    # - env: INSTANCE=default-arch-base-latest-2019-2-py2
+    - env: INSTANCE=default-fedora-30-2018-3-py3
     # - env: INSTANCE=default-debian-9-2018-3-py2
     # - env: INSTANCE=default-ubuntu-1604-2018-3-py2
     # - env: INSTANCE=default-centos-7-2018-3-py2
-    - env: INSTANCE=default-fedora-29-2018-3-py2
-    - env: INSTANCE=default-opensuse-leap-15-2018-3-py2
+    # - env: INSTANCE=default-opensuse-leap-151-2018-3-py2
     # - env: INSTANCE=default-amazonlinux-2-2018-3-py2
-    # - env: INSTANCE=default-arch-base-latest-2018-3-py2
+    - env: INSTANCE=default-arch-base-latest-2018-3-py2
     # - env: INSTANCE=default-debian-8-2017-7-py2
     # - env: INSTANCE=default-ubuntu-1604-2017-7-py2
     - env: INSTANCE=default-centos-6-2017-7-py2
-    # - env: INSTANCE=default-fedora-29-2017-7-py2
-    # - env: INSTANCE=default-opensuse-leap-15-2017-7-py2
+    # - env: INSTANCE=default-fedora-30-2017-7-py2
+    # - env: INSTANCE=default-opensuse-leap-151-2017-7-py2
     # - env: INSTANCE=default-amazonlinux-2-2017-7-py2
     # - env: INSTANCE=default-arch-base-latest-2017-7-py2
 
