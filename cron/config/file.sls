@@ -23,3 +23,16 @@ cron.{{ task }}:
     {%- endif %}
 
 {%- endfor %}
+
+{%- for env, env_options in cron.get('env', {}). items() %}
+{%- set env_type = env_options.type|d('present') %}
+
+cron.{{ env }}:
+  cron.env_{{ env_type }}:
+    - name: {{ env_options.name }}
+    {%- if env_type == 'present' %}
+    - value: {{ env_options.value }}
+    {%- endif %}
+    - user: {{ env_options.user|d('root') }}
+
+{%- endfor %}
