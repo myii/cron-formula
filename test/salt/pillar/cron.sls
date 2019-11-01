@@ -46,3 +46,14 @@ cron:
       minute: random
       hour: 1
       commented: true
+  env:
+    env1:
+      type: present  # Default
+      name: PATH
+      value: /usr/local/bin:/usr/bin:/bin:/usr/games
+      user: root  # Default
+    env2:
+      type: absent
+      name: MAILTO
+      value: example@example.com  # not needed
+      user: root  # Default
