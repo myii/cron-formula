@@ -45,3 +45,15 @@ validate_cron.{{ task }}_{{ section }}:
 {%-   endif %}
 
 {%- endfor %}
+
+{%- for env, env_options in cron.get('env', {}). items() %}
+{%-   set env_type = env_options.type|d('present') %}
+
+validate_cron.{{ env }}_{{ env_type }}:
+  module_and_function: cron.raw_cron
+  args:
+    - {{ env_options.user|d('root') }}
+  assertion: {{ 'assertNotIn' if env_type == 'absent' else 'assertIn' }}
+  expected-return: '{{ env_options.name }}={{ env_options.value }}'
+
+{%- endfor %}
