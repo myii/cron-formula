@@ -2,6 +2,35 @@
 Changelog
 =========
 
+`0.3.0 <https://github.com/saltstack-formulas/cron-formula/compare/v0.2.4...v0.3.0>`_ (2019-11-03)
+------------------------------------------------------------------------------------------------------
+
+Bug Fixes
+^^^^^^^^^
+
+
+* **release.config.js:** use full commit hash in commit link [skip ci] (\ `c5eb3b7 <https://github.com/saltstack-formulas/cron-formula/commit/c5eb3b78bcfa635ca7a2df01c03e5b60b4ed2758>`_\ )
+
+Continuous Integration
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+* **kitchen:** use ``debian-10-master-py3`` instead of ``develop`` [skip ci] (\ `aca0d9e <https://github.com/saltstack-formulas/cron-formula/commit/aca0d9e437c951f798fe097415746218d84dea58>`_\ )
+* **kitchen:** use ``develop`` image until ``master`` is ready (\ ``amazonlinux``\ ) [skip ci] (\ `f9c61a9 <https://github.com/saltstack-formulas/cron-formula/commit/f9c61a98593a90d5d4f5b0119a2f486fe70ea133>`_\ )
+* **kitchen+travis:** upgrade matrix after ``2019.2.2`` release [skip ci] (\ `2062f10 <https://github.com/saltstack-formulas/cron-formula/commit/2062f10f947155b051ce93e7636cbd9bdb604a6c>`_\ )
+
+Features
+^^^^^^^^
+
+
+* **cron.env:** add env option in cron-formula (\ `12cee12 <https://github.com/saltstack-formulas/cron-formula/commit/12cee122279fc0abe113d35d59b626e2f94913ae>`_\ )
+
+Performance Improvements
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+* **travis:** improve ``salt-lint`` invocation [skip ci] (\ `624b05a <https://github.com/saltstack-formulas/cron-formula/commit/624b05a180a0013c0973e271e382cc46cf12b9c5>`_\ )
+
 `0.2.4 <https://github.com/saltstack-formulas/cron-formula/compare/v0.2.3...v0.2.4>`_ (2019-10-23)
 ------------------------------------------------------------------------------------------------------
 
