@@ -48,12 +48,17 @@ cron:
       commented: true
   env:
     env1:
-      type: present  # Default
+      type: present
       name: PATH
       value: /usr/local/bin:/usr/bin:/bin:/usr/games
-      user: root  # Default
+      user: root
     env2:
-      type: absent
+      type: present
       name: MAILTO
-      value: example@example.com  # not needed
-      user: root  # Default
+      value: example@example.com
+      user: root
+    env3:
+      type: absent
+      name: LANG
+      value: en_GB.UTF-8
+      user: root
