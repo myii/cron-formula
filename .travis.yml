@@ -34,6 +34,10 @@ script:
         --config-dir=/tmp/kitchen/etc/salt
         saltcheck.run_state_tests
         cron check_all=True";
+      bin/kitchen exec "${INSTANCE}" -c
+        "sudo salt-call
+        --config-dir=/tmp/kitchen/etc/salt
+        cron.list_tab root";
     fi
   # yamllint enable rule:line-length
 
