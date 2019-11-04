@@ -2,6 +2,15 @@
 Changelog
 =========
 
+`0.3.1 <https://github.com/saltstack-formulas/cron-formula/compare/v0.3.0...v0.3.1>`_ (2019-11-04)
+------------------------------------------------------------------------------------------------------
+
+Tests
+^^^^^
+
+
+* **saltcheck:** add test for cron envs (\ ``absent`` & ``present``\ ) (\ `82cd0a7 <https://github.com/saltstack-formulas/cron-formula/commit/82cd0a7f3a2f5d61397b6cfc9a45470477dc51cf>`_\ )
+
 `0.3.0 <https://github.com/saltstack-formulas/cron-formula/compare/v0.2.4...v0.3.0>`_ (2019-11-03)
 ------------------------------------------------------------------------------------------------------
 
