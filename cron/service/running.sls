@@ -9,9 +9,10 @@ cron.service:
 {%- if 'enabled' not in cron or ( 'enabled' in cron and cron.enabled ) %}
   service.running:
     - name: {{ cron.service }}
-    - enable: true
+    - enable: True
+    - reload: False
 {%- else %}
   service.dead:
     - name: {{ cron.service }}
-    - enable: false
+    - enable: False
 {%- endif %}
