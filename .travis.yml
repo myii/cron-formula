@@ -24,20 +24,9 @@ script:
   # Likewise, use a custom `cron.py` temporarily until the upstream PR is merged:
   # - https://github.com/saltstack/salt/pull/55016
   - if [ ! -z $(echo "${INSTANCE}" | grep \\-master-) ]; then
-      bin/kitchen exec "${INSTANCE}" -c
-        "sudo curl -o \$(find /usr/lib/ -type d -name modules | grep packages/salt/modules)/saltcheck.py
-        https://raw.githubusercontent.com/myii/salt/fix/add-retcode/salt/modules/saltcheck.py";
-      bin/kitchen exec "${INSTANCE}" -c
-        "sudo curl -o \$(find /usr/lib/ -type d -name modules | grep packages/salt/modules)/cron.py
-        https://raw.githubusercontent.com/myii/salt/fix/add-retcode/salt/modules/cron.py";
-    fi
-  # If a `master` instance, run all of the `saltcheck` tests
-  - if [ ! -z $(echo "${INSTANCE}" | grep \\-master-) ]; then
-      bin/kitchen exec "${INSTANCE}" -c
-        "sudo salt-call
-        --config-dir=/tmp/kitchen/etc/salt
-        saltcheck.run_state_tests
-        cron check_all=True";
+      bin/kitchen exec "${INSTANCE}" -c "
+        sudo salt-call --config-dir=/tmp/kitchen/etc/salt saltcheck.run_state_tests cron check_all=True
+      ";
     fi
   # yamllint enable rule:line-length
 

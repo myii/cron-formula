@@ -15,18 +15,29 @@ platforms:
   - name: debian-10-master-py3
     driver:
       image: netmanagers/salt-master-py3:debian-10
+      provision_command: &provision_command
+        - mkdir -p /tmp/kitchen/srv/salt/_modules
+        # yamllint disable-line rule:line-length
+        - curl -o /tmp/kitchen/srv/salt/_modules/saltcheck.py https://raw.githubusercontent.com/myii/salt/fix/add-retcode/salt/modules/saltcheck.py
+        # yamllint disable-line rule:line-length
+        - curl -o /tmp/kitchen/srv/salt/_modules/cron.py      https://raw.githubusercontent.com/myii/salt/fix/add-retcode/salt/modules/cron.py
+        - salt-call --config-dir=/tmp/kitchen/etc/salt saltutil.sync_modules
   - name: ubuntu-1804-master-py3
     driver:
       image: netmanagers/salt-master-py3:ubuntu-18.04
+      provision_command: *provision_command
   - name: centos-8-master-py3
     driver:
       image: netmanagers/salt-master-py3:centos-8
+      provision_command: *provision_command
   - name: fedora-31-master-py3
     driver:
       image: netmanagers/salt-master-py3:fedora-31
+      provision_command: *provision_command
   - name: opensuse-leap-151-master-py3
     driver:
       image: netmanagers/salt-master-py3:opensuse-leap-15.1
+      provision_command: *provision_command
       run_command: /usr/lib/systemd/systemd
     # Workaround to avoid intermittent failures on `opensuse-leap-15.1`:
     # => SCP did not finish successfully (255):  (Net::SCP::Error)
@@ -35,9 +46,11 @@ platforms:
   - name: amazonlinux-2-master-py3
     driver:
       image: netmanagers/salt-master-py3:amazonlinux-2
+      provision_command: *provision_command
   - name: arch-base-latest-master-py2
     driver:
       image: netmanagers/salt-master-py2:arch-base-latest
+      provision_command: *provision_command
       run_command: /usr/lib/systemd/systemd
 
   ## SALT `2019.2`
