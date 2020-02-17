@@ -10,7 +10,7 @@ cron.service:
   service.running:
     - name: {{ cron.service }}
     - enable: True
-    - reload: False
+    - reload: True
 {%- else %}
   service.dead:
     - name: {{ cron.service }}
