@@ -8,6 +8,11 @@
 # FILE PATTERN                              OWNER(S)
 *                                           @NONE
 
+# SECTION: Owner(s) for specific directories
+# FILE PATTERN                              OWNER(S)
+/cron/saltcheck-tests/                      @myii
+/test/                                      @myii
+
 # SECTION: Owner(s) for files/directories related to `semantic-release`
 # FILE PATTERN                              OWNER(S)
 /.github/workflows/                         @saltstack-formulas/ssf
@@ -32,7 +37,5 @@
 /release-rules.js                           @saltstack-formulas/ssf
 /release.config.js                          @saltstack-formulas/ssf
 
-# SECTION: Owner(s) for specific files/directories
+# SECTION: Owner(s) for specific files
 # FILE PATTERN                              OWNER(S)
-/cron/saltcheck-tests/                      @myii
-/test/                                      @myii
