@@ -11,8 +11,7 @@
 # SECTION: Owner(s) for specific directories
 # FILE PATTERN                              OWNER(S)
 /cron/saltcheck-tests/                      @myii
-/test/integration/**/controls/              @myii
-/test/salt/                                 @myii
+/test/                                      @myii
 
 # SECTION: Owner(s) for files/directories related to `semantic-release`
 # FILE PATTERN                              OWNER(S)
