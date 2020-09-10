@@ -4,3 +4,4 @@
 cron:
   pkg: cronie
   service: cron
+  enabled: true

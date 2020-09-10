@@ -6,7 +6,7 @@
 {%- from tplroot ~ "/map.jinja" import cron with context %}
 
 cron.service:
-{%- if 'enabled' not in cron or ( 'enabled' in cron and cron.enabled ) %}
+{%- if cron.enabled %}
   service.running:
     - name: {{ cron.service }}
     - enable: true
