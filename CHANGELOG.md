@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.3.2](https://github.com/saltstack-formulas/cron-formula/compare/v0.3.1...v0.3.2) (2020-09-10)
+
+
+### Continuous Integration
+
+* **gemfile:** restrict `train` gem version until upstream fix [skip ci] ([ce61077](https://github.com/saltstack-formulas/cron-formula/commit/ce610777803fa67ce4e8aa4e01823741ec5844af))
+* **gemfile.lock:** add to repo with updated `Gemfile` [skip ci] ([269b49f](https://github.com/saltstack-formulas/cron-formula/commit/269b49f38a304cf7ca63ae889f178a939353accd))
+* **kitchen:** avoid using bootstrap for `master` instances [skip ci] ([0afa1b1](https://github.com/saltstack-formulas/cron-formula/commit/0afa1b10d2a4325880cfeda7f716d2eaf82edb4b))
+* **kitchen:** use `saltimages` Docker Hub where available [skip ci] ([74999aa](https://github.com/saltstack-formulas/cron-formula/commit/74999aa17df28a7128058697f6b5f4a59ab468c6))
+* **kitchen+travis:** remove `master-py2-arch-base-latest` [skip ci] ([54b5a1a](https://github.com/saltstack-formulas/cron-formula/commit/54b5a1abaad6b8a650ad48d1cee807c486e53c0b))
+* **travis:** add notifications => zulip [skip ci] ([fb46b07](https://github.com/saltstack-formulas/cron-formula/commit/fb46b0799e4084a8b22f77d0c5c6b2179e20be01))
+* **travis:** apply changes from build config validation [skip ci] ([730df10](https://github.com/saltstack-formulas/cron-formula/commit/730df1087fe44b7bc40bd9e2530188cb9c6ffcca))
+* **travis:** opt-in to `dpl v2` to complete build config validation [skip ci] ([4fc3960](https://github.com/saltstack-formulas/cron-formula/commit/4fc3960112929de84d546e3547ce81f9685c5687))
+* **travis:** quote pathspecs used with `git ls-files` [skip ci] ([0fef6f1](https://github.com/saltstack-formulas/cron-formula/commit/0fef6f12230e018b8c0402c80a2f2c98a1280ef9))
+* **travis:** run `shellcheck` during lint job [skip ci] ([1b2eb28](https://github.com/saltstack-formulas/cron-formula/commit/1b2eb285a5bb62c86d6e7e64ddd76ce85a709d2b))
+* **travis:** use `major.minor` for `semantic-release` version [skip ci] ([d4a6100](https://github.com/saltstack-formulas/cron-formula/commit/d4a610094969d583621cdec3195652508fe0aace))
+* **travis:** use build config validation (beta) [skip ci] ([db46bd9](https://github.com/saltstack-formulas/cron-formula/commit/db46bd9c9008fddc3681602cf559513df3ee1976))
+* **workflows/commitlint:** add to repo [skip ci] ([449c919](https://github.com/saltstack-formulas/cron-formula/commit/449c919f14dc295883de17db7b5b42dea1c56a2b))
+
+
+### Reverts
+
+* **codeowners:** update specific directories section [skip ci] ([2ac7785](https://github.com/saltstack-formulas/cron-formula/commit/2ac7785f6446abf26d8e9897e7a5898f5bb42d1b))
+
+
+### Styles
+
+* **state:** avoid complicated comparison ([496f09b](https://github.com/saltstack-formulas/cron-formula/commit/496f09b2e1c2ba88d8df95ec0c0011fce0d4a7a7))
+
 ## [0.3.1](https://github.com/saltstack-formulas/cron-formula/compare/v0.3.0...v0.3.1) (2019-11-04)
 
 
